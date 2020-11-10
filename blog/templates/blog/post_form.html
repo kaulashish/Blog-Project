@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <form method="POST">
+        {% csrf_token %}  <!-- must be included -->
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Blog Post</legend>
+          {{ form|crispy }} <!-- '|' is also known as filter -->
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit" name="button">Post</button>
+          <a class="btn btn-outline-secondary" name="button", href="{% url 'blog-home' %}">Cancel</a>
+        </div>
+      </form>
+    </div>
+{% endblock content %}

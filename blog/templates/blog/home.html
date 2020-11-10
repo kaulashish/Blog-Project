@@ -1,0 +1,19 @@
+<!-- inheriting everthing common from the base.html file -->
+
+{% extends "blog/base.html" %}
+
+{% block content %}
+  {% for i in posts %}  <!-- for if else/for loops enclose code within '{}'-->
+    <article class="media content-section">
+    <img class="rounded-circle account-img" src="{{ i.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ i.author }}</a>
+        <small class="text-muted">{{ i.date_posted|date:"F d, Y" }}</small>
+      </div>
+      <h2><a class="article-title" href="{% url 'post-detail' i.id %}">{{ i.title }}</a></h2>
+      <p class="article-content">{{ i.post }}</p>
+    </div>
+    </article>
+  {% endfor %}  <!-- end every if/else with endif and for loop with endfor -->
+{% endblock content %}
