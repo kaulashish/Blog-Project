@@ -1,9 +1,8 @@
-<!-- inheriting everthing common from the base.html file -->
-
 {% extends "blog/base.html" %}
 
 {% block content %}
-  {% for i in posts %}  <!-- for if else/for loops enclose code within '{}'-->
+<h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+  {% for i in posts %}
     <article class="media content-section">
     <img class="rounded-circle account-img" src="{{ i.author.profile.image.url }}">
     <div class="media-body">
@@ -15,7 +14,7 @@
       <p class="article-content">{{ i.post }}</p>
     </div>
     </article>
-  {% endfor %}  <!-- end every if/else with endif and for loop with endfor -->
+  {% endfor %}
 
   {% if is_paginated %} <!-- checks if page is paginated -->
     {% if page_obj.has_previous %}  <!-- checks if our current page has a previous page -->

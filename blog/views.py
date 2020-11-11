@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView,
                                   DeleteView)
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post  #.models for current dir
 
@@ -18,6 +19,20 @@ class PostListView(ListView):  #class based view for homepage
     template_name = 'blog/home.html'  # <appname>/<model>_<viewtype>.html
     context_object_name = 'posts'  #by default searches for context name as 'objectlist'
     ordering = ['-date_posted']  #'-' sign orders in reverse order
+    paginate_by = 5  #setting attribute on our list view for pagination, i.e setting no of posts per page
+
+
+class UserPostListView(ListView):  #Post list view for particular user
+    model = Post
+    template_name = 'blog/user_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 5
+
+    #overiding the query that this list view makes for returning posts related to specific user
+    def get_queryset(self):
+        #capture username to user variable if exists, else give a 404 error
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
 
 
 class PostDetailView(DetailView):

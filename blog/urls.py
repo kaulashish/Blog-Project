@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (PostListView, PostDetailView, PostCreateView,
-                    PostUpdateView,
-                    PostDeleteView)  #importing class view directly
+                    PostUpdateView, PostDeleteView,
+                    UserPostListView)  #importing class view directly
 
 from . import views  #from current directory import views.py
 
@@ -11,6 +11,7 @@ urlpatterns = [
     # unique name = 'blog-home' to avoid colliding with
     # other app routes
     path('', PostListView.as_view(), name='blog-home'),
+    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     #by convention PostDetailView expects primary key as 'pk' eg. for first post, url will be localhost:8000/post/1
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
