@@ -134,3 +134,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'blog-home'
+
+#sends email to console in localmachine, actual email not implemented
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# TODO: Create actual email hosting(Note : email port causing issue.)
+
+# EMAIL_HOST = 'smtpd'
+# EMAIL_PORT = 1025
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'ashishdjangoproject@gmail.com'  #os.environ.get('EMAIL_USER')
+# EMAIL_HOST_PASS = 'ashishdjangoproject123'  #os.environ.get('EMAIL_PASS')
